@@ -106,7 +106,7 @@ function ProductScreen() {
 
               <ListGroup.Item>
                 <Button 
-                // onClick={addToCartHandler}
+                  onClick={addToCartHandler}
                   className='btn-block' 
                   type='button' 
                   disabled={product.countInStock == 0}>
