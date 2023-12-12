@@ -1,13 +1,16 @@
 import React, { useState, useEffect }  from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams, useNavigate, matchPath, matchRoutes } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Card, Form, ListGroupItem } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {listProductDetails} from '../actions/productActions'
 
-function ProductScreen({match, history}) {
+function ProductScreen() {
+
+  let navigate = useNavigate();
+
   const [qty, setQty] = useState(1)
 
   const dispatch = useDispatch()
@@ -17,13 +20,12 @@ function ProductScreen({match, history}) {
 
   useEffect(() => {
       dispatch(listProductDetails(id))
-  }, [dispatch, match])
+  }, [dispatch, matchRoutes])
 
-  // const addToCartHandler = () => {
-  //   history.push(`/cart/${id}?qty=${qty}`)
-  // }
+  const addToCartHandler = () => {
+    navigate(`/cart/${id}?qty=${qty}`)
+  }
   
-  // let product = {}
   
   return (
     <div>
@@ -104,7 +106,7 @@ function ProductScreen({match, history}) {
 
               <ListGroup.Item>
                 <Button 
-                // onClick={addToCartHandler}
+                  onClick={addToCartHandler}
                   className='btn-block' 
                   type='button' 
                   disabled={product.countInStock == 0}>
