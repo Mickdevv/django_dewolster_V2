@@ -8,7 +8,7 @@ function Header() {
         <Navbar expand="lg" variant='dark' bg="dark" collapseOnSelect>
             <Container fluid>
                 <LinkContainer to='/'>
-                    <Navbar.Brand >ProShop</Navbar.Brand>
+                    <Navbar.Brand >Barnsteensieraden</Navbar.Brand>
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
