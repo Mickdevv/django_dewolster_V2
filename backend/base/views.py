@@ -53,7 +53,7 @@ def getUserProfile(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated, IsA])
+@permission_classes([IsAuthenticated, IsAdminUser])
 
 def getProducts(request):
     products = Product.objects.all()
