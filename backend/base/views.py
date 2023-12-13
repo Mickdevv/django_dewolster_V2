@@ -11,7 +11,7 @@ from .serializers import ProductSerializer, UserSerializer, UserSerializerWithTo
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-# Create your views here.
+# Create your views here..
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
