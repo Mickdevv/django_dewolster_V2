@@ -48,11 +48,12 @@ function ProfileScreen() {
       if(password != confirmPassword){
           setMessage("Passwords do not match")
       } else {
+          console.log(JSON.stringify(user))
           dispatch(updateUserProfile({
             'id': user._id,
-            'name': user.name,
-            'email': user.email,
-            'password': user.password,
+            'name': name,
+            'email': email,
+            'password': password,
           }))
       }
     }

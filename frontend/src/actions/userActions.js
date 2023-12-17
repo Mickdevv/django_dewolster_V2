@@ -151,7 +151,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             userLogin: { userInfo },
         } = getState()
         
-        console.log(`Bearer ${userInfo.token}`)
+        console.log(JSON.stringify(user))
 
         const config = {
             headers: {
