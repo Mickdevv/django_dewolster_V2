@@ -30,17 +30,15 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
-    # print(data)
-    
     try:
         user = User.objects.create(
-            first_name = data ['name'],
-            username = data['email'],
-            email = data['email'],
-            password = make_password(data['password'])
+            first_name=data['name'],
+            username=data['email'],
+            email=data['email'],
+            password=make_password(data['password'])
         )
+
         serializer = UserSerializerWithToken(user, many=False)
-        
         return Response(serializer.data)
     except:
         message = {'detail': 'User with this email already exists'}
@@ -50,7 +48,7 @@ def registerUser(request):
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
     user = request.user
-    serializer = UserSerializer(user, many=False)
+    serializer = UserSerializerWithToken(user, many=False)
     return Response(serializer.data)
 
 @api_view(['PUT'])
@@ -58,8 +56,11 @@ def getUserProfile(request):
 def updateUserProfile(request):
     user = request.user
     serializer = UserSerializerWithToken(user, many=False)
-
     data = request.data
+
+    for i in data: 
+        print(i)
+    
     user.first_name = data['name']
     user.username = data['email']
     user.email = data['email']
