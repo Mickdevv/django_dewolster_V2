@@ -57,9 +57,6 @@ def updateUserProfile(request):
     user = request.user
     serializer = UserSerializerWithToken(user, many=False)
     data = request.data
-
-    for i in data: 
-        print(i)
     
     user.first_name = data['name']
     user.username = data['email']

@@ -50,14 +50,14 @@ function ProfileScreen() {
       } else {
           dispatch(updateUserProfile({
             'id': user._id,
-            'name': user.name,
-            'email': user.email,
-            'password': user.password,
+            'name': name,
+            'email': email,
+            'password': password,
           }))
+          setMessage("")
       }
     }
 
-    
   return (
     <Row>
       <Col md={3}>
@@ -69,6 +69,7 @@ function ProfileScreen() {
           <Form.Group controlId='name'>
               <Form.Label>Name</Form.Label>
               <Form.Control 
+              required
               type='name' 
               placeholder='Enter name' 
               value={name} 
@@ -78,6 +79,7 @@ function ProfileScreen() {
           <Form.Group controlId='email'>
               <Form.Label>Email Address</Form.Label>
               <Form.Control 
+              required
               type='email' 
               placeholder='Enter email' 
               value={email} 

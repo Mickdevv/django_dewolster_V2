@@ -151,7 +151,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             userLogin: { userInfo },
         } = getState()
         
-        console.log(`Bearer ${userInfo.token}`)
+        // console.log(`Bearer ${userInfo.token}`)
 
         const config = {
             headers: {
@@ -192,4 +192,5 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch({ type: USER_LOGOUT })
+    dispatch({ type: USER_DETAILS_RESET })
 }
