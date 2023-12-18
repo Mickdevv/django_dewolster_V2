@@ -34,7 +34,7 @@ function PaymentScreen() {
 
       <Form onSubmit={submitHandler}>
         <Form.Group>
-            <Form.Label as='legend'>Select Method</Form.Label>
+            <Form.Label as='legend' className='mb-3'>Select Method</Form.Label>
             <Col>
                 <Form.Check
                 type='radio'
@@ -50,7 +50,7 @@ function PaymentScreen() {
                 </Form.Check>
             </Col>
         </Form.Group>
-        <Button type='submit' variant='primary'>Continue</Button>
+        <Button type='submit' variant='primary' className='mt-3'>Continue</Button>
       </Form>
     </FormContainer>
   )

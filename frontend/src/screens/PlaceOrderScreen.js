@@ -5,19 +5,40 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
+import { createOrder } from '../actions/orderActions'
 
 function PlaceOrderScreen() {
 
+  const orderCreate = useSelector(state => state.orderCreate)
+  const { order, error, success } = orderCreate
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const cart = useSelector(state => state.cart)
 
   cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
-  cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2)
+  cart.shippingPrice = (cart.itemsPrice > 1000 ? 0 : 10).toFixed(2)
+  // console.log(JSON.stringify(cart))
   cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice)).toFixed(2)
 
+  if(!cart.paymentMethod){
+    navigate('/payment')
+  }
+
+  useEffect(() => {
+    if(success){
+      navigate(`/order/${order._id}`)
+    }
+  }, [success, navigate])
+
   const placeOrder = () => {
-    console.log('Place Order')
+    dispatch(createOrder({
+      orderItems: cart.cartItems,
+      shippingAddress: cart.shippingAddress,
+      paymentMethod: cart.paymentMethod,
+      itemsPrice: cart.itemsPrice,
+      shippingPrice: cart.shippingPrice,
+      totalPrice: cart.totalPrice,
+    }))
   }
 
   return (
@@ -100,6 +121,9 @@ function PlaceOrderScreen() {
               </ListGroup.Item>
 
               <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
+              </ListGroup.Item>
+              <ListGroup.Item>
                 <Row>
                   <Button 
                   type='button'
@@ -108,7 +132,6 @@ function PlaceOrderScreen() {
                   onClick={placeOrder}
                   >
                     Place order
-                    
                   </Button>
                 </Row>
               </ListGroup.Item>
