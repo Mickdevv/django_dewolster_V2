@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
+import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 function PlaceOrderScreen() {
 
@@ -27,6 +27,7 @@ function PlaceOrderScreen() {
   useEffect(() => {
     if(success){
       navigate(`/order/${order._id}`)
+      dispatch({ type: ORDER_CREATE_RESET })
     }
   }, [success, navigate])
 
