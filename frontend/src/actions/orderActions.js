@@ -90,7 +90,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
             paymentResult,
             config
             )
-            // console.log(JSON.stringify(data))
+            console.log(JSON.stringify(data))
 
         dispatch({
             type: ORDER_PAY_SUCCESS,
