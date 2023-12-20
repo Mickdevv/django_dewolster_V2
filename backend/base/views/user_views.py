@@ -76,9 +76,21 @@ def getUsers(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUserById(request, pk):
+    users = User.objects.get(id=pk)
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteUser(request, pk):
     userForDeletion = User.objects.get(id=pk)
-    userForDeletion.delete()
-    return Response('User ' + pk + 'deleted')
+    if(userForDeletion == request.user):
+        return Response('User ' + pk + 'not deleted : you cannot delete yourself')
+    elif(userForDeletion.is_staff or userForDeletion.is_superuser):
+        return Response('User ' + pk + 'not deleted : you cannot delete staff')
+    else: 
+        userForDeletion.delete()
+        return Response('User ' + pk + 'deleted')
