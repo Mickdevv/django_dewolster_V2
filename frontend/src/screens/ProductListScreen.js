@@ -35,13 +35,13 @@ function ProductListScreen() {
         } 
         if (successCreate) {
             console.log(JSON.stringify(createdProduct))
-            navigate(`/admin/products/${createdProduct._id}/edit`)
+            navigate(`/admin/product/${createdProduct._id}/edit`)
         }else {
             dispatch(listProducts())
         }
         
         
-    }, [dispatch, navigate, userInfo, successDelete, successCreate])
+    }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct])
 
     const deleteProductHandler = (id) => {
         console.log('Delete product')

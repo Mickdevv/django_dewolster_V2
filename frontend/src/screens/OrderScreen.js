@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -119,6 +120,7 @@ function OrderScreen() {
                                                         <Row>
                                                             <Col md={1}>
                                                                 <Image src={item.image} alt={item.name} fluid rounded />
+                                                                {/* <Image src={axios.defaults.baseURL.slice(0, -1) + item.image} alt={item.name} fluid rounded /> */}
                                                             </Col>
 
                                                             <Col>

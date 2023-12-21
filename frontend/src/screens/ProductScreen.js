@@ -1,4 +1,5 @@
 import React, { useState, useEffect }  from 'react'
+import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams, useNavigate, matchPath, matchRoutes } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Card, Form, ListGroupItem } from 'react-bootstrap'
@@ -40,6 +41,7 @@ function ProductScreen() {
         :(
           <Row>
         <Col md={6}>
+          {/* <Image src={axios.defaults.baseURL.slice(0, -1) + product.image} alt={product.name} fluid /> */}
           <Image src={product.image} alt={product.name} fluid />
         </Col>
         <Col md={3}>

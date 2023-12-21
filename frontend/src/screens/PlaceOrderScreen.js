@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -73,6 +74,7 @@ function PlaceOrderScreen() {
                       <Row>
                         <Col md={2} >
                           <Image src={item.image} alt={item.name} fluid rounded />
+                          {/* <Image src={axios.defaults.baseURL.slice(0, -1) + item.image} alt={item.name} fluid rounded /> */}
                         </Col>
 
                         <Col>
