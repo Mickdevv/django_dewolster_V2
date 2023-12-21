@@ -76,6 +76,8 @@ def uploadImage(request):
 
     product.image = request.FILES.get('image')
     product.save()
+    # product.image.url = ('/images' + product.image.url.split('/images')[-1])
 
     print("Image URL : " + product.image.url)
     return Response(product.image.url)
+    # return Response('/images' + product.image.url.split('/images')[-1])
