@@ -66,7 +66,7 @@ function OrderScreen() {
 
 
     const successPaymentHandler = () => {
-        dispatch(deliverOrder(orderId))
+        dispatch(payOrder(orderId))
     }
 
     const successDeliverHandler = () => {
