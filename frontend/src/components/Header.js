@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Nav, Navbar, Container, Row, Col, Dropdown, Form, Button, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { logout } from '../actions/userActions'
+import SearchBox from './SearchBox'
 
 function Header() {
 
@@ -46,23 +47,22 @@ function Header() {
                         </LinkContainer>
                     )}
 
+                    {userInfo && userInfo.isAdmin && (
+                        <NavDropdown title='Admin' id='adminmenu'>
+                            <LinkContainer to='/admin/userlist'>
+                                <NavDropdown.Item>Users</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/admin/productlist'>
+                                <NavDropdown.Item>Products</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/admin/orderlist'>
+                                <NavDropdown.Item>Orders</NavDropdown.Item>
+                            </LinkContainer>
+                        </NavDropdown>
+                    )}
                     
-
-                    <NavDropdown title="Link" id="navbarScrollingDropdown">
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                        Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                        Something else here
-                    </NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="#" disabled>
-                    Link
-                    </Nav.Link>
                 </Nav>
-                <Form className="d-flex">
+                {/* <Form className="d-flex">
                     <Form.Control
                     type="search"
                     placeholder="Search"
@@ -70,7 +70,10 @@ function Header() {
                     aria-label="Search"
                     />
                     <Button variant="outline-success">Search</Button>
-                </Form>
+                </Form> */}
+
+                <SearchBox />
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>

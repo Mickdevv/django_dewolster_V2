@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
 from base.models import Product, User
-from base.products import products
+# from base.products import products
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -55,11 +55,7 @@ def getUserProfile(request):
 @permission_classes([IsAuthenticated])
 def updateUserProfile(request):
     user = request.user
-    serializer = UserSerializerWithToken(user, many=False)
     data = request.data
-
-    for i in data: 
-        print(i)
     
     user.first_name = data['name']
     user.username = data['email']
@@ -68,6 +64,25 @@ def updateUserProfile(request):
     if data['password'] != '':
         user.password = make_password(data['password'])
 
+    user.save()
+
+    serializer = UserSerializerWithToken(user, many=False)
+    
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+    data = request.data
+    
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    user.is_staff = data['isAdmin']
+
+    serializer = UserSerializer(user, many=False)
+    
     user.save()
 
     return Response(serializer.data)
@@ -79,3 +94,21 @@ def getUsers(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUserById(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteUser(request, pk):
+    userForDeletion = User.objects.get(id=pk)
+    if(userForDeletion == request.user):
+        return Response('User ' + pk + 'not deleted : you cannot delete yourself')
+    elif(userForDeletion.is_staff or userForDeletion.is_superuser):
+        return Response('User ' + pk + 'not deleted : you cannot delete staff')
+    else: 
+        userForDeletion.delete()
+        return Response('User ' + pk + 'deleted')

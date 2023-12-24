@@ -9,6 +9,7 @@ function Product({product}) {
     <Card className='my-3 p-3 rounded'>
         <Link to={`/product/${product._id}`}>
             <Card.Img src={product.image} />
+            {/* <Card.Img src={axios.defaults.baseURL.slice(0, -1) + product.image} /> */}
         </Link>
 
         <Card.Body>

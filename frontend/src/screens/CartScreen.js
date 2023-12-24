@@ -11,7 +11,7 @@ function CartScreen() {
   let location = useLocation()
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
   
-  console.log(productId['id'])
+  // console.log(productId['id'])
 
   const dispatch = useDispatch()
 
@@ -26,12 +26,12 @@ function CartScreen() {
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
-    console.log("remove", id)
+    // console.log("remove", id)
   }
 
   let navigate = useNavigate();
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
+    navigate('/login?redirect=/shipping')
   }
 
   return (
